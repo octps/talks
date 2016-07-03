@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta charset="utf-8"/>
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
@@ -28,7 +29,8 @@
     <body>
         <h1>Slim</h1>
         <div>a microframework for PHP</div>
-
+<? print_r($args['name']) ?>
+<? print_r($test) ?>
         <?php if (isset($name)) : ?>
             <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
         <?php else: ?>

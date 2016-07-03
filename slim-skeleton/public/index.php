@@ -17,6 +17,11 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
 
+// echo ("<pre>");
+// $container = $app->getContainer();
+// print_r($container->settings['config']);
+// echo ("</pre>");
+
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 
