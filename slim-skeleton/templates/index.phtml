@@ -29,10 +29,9 @@
     <body>
         <h1>Slim</h1>
         <div>a microframework for PHP</div>
-<? print_r($args['name']) ?>
-<? print_r($test) ?>
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
+<? print_r($contents) ?>
+        <?php if (isset($args['name'])) : ?>
+            <h2>Hello <?= htmlspecialchars($args['name']); ?>!</h2>
         <?php else: ?>
             <p>Try <a href="http://www.slimframework.com">SlimFramework</a>
         <?php endif; ?>
