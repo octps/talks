@@ -14,5 +14,15 @@ return [
             'name' => 'slim-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
+
+        'config' => [
+             'db' => [
+                'host' => "localhost",
+                'user' => "root",
+                'pass' => "root",
+                'dbname' => "movies"
+             ]
+        ],
+
     ],
 ];
