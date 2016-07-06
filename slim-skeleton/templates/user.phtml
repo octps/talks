@@ -7,9 +7,14 @@
         <link href="/css/common.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>talks</h1>
-        <div>talks to someone</div>
-        <h1>login</h1>
+    	<header>
+	        <h1>talks</h1>
+    	    <div>talks to someone</div>
+        	<nav>
+			<a href="/<?= @$user->name ?>">home</a>
+			</nav>
+		</header>
+		<!-- ここから -->
         <form action="/login" method="post">
           <label>
             E-mail : <input type="email" name="email" value="">
