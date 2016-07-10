@@ -13,11 +13,22 @@ class controller_log {
         if ($user !== false) {
           $_SESSION["loginUser"] = $user->name;
           $_SESSION["userId"] = $user->id;
-            return $res->withStatus(302)->withHeader('Location', ('/' . $user->name));
+            return $res->withStatus(200)->withHeader('Location', ('/' . $user->name));
         }
         // print_r("you");
-        return $res->withStatus(302)->withHeader('Location', '/');
+        return $res->withStatus(200)->withHeader('Location', '/');
     }
+  }
+
+  static public function out ($res) {
+    $_SESSION = array();
+
+    if (isset($_COOKIE["PHPSESSID"])) {
+        setcookie("PHPSESSID", '', time() - 1800, '/');
+    }
+
+    session_destroy();
+    return $res->withStatus(200)->withHeader('Location', ('/'));
   }
 
 }

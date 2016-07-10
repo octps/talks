@@ -2,12 +2,15 @@
 
 require_once(__DIR__ . '/../controller.php');
 require_once(__DIR__ . '/../models/user.php');
+require_once(__DIR__ . '/../models/contents.php');
 
-class controller_user
+class Controller_User
 {
-  public static function get() {
-	  $contents = Model_User::get();
-	  return $contents;
+  public static function get($args) {
+	  $user = Model_User::get($args);
+	  $contents = Model_Contents::get();
+	  $userContetns = array('user'=>$user, 'contents'=>$contents);
+	  return $userContetns;
 	}
 }
 

@@ -14,15 +14,28 @@
 			<a href="/<?= @$user->name ?>">home</a>
 			</nav>
 		</header>
+            your name is <?= $_SESSION["loginUser"] ?> 
+            this place is <?= $name ?><br />
 		<!-- ここから -->
         <form action="/login" method="post">
           <label>
-            E-mail : <input type="email" name="email" value="">
+		 	talks ; <input type="text" name="content" value="">
           </label>
           <label>
-            password : <input type="password" name="password" value="">
+            to : <input type="text" name="to" value="">
           </label>
-          <input type="submit" value="login">
+          <input type="submit" value="talks to">
         </form>
+
+        <? foreach ($contents as $content): ?>
+         <div>
+         	<span><?= $content->updated_at ?></span><br>
+         	<span><?= $content->content ?></span>
+         	<span><?= $content->send_id ?></span>
+     	</div>
+	     <? endforeach ?>
+        <footer>
+        	<a href="/logout">logout</a>
+        </footer>
     </body>
 </html>
