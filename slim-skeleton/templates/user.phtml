@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Slim 3</title>
+        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <link href="/css/common.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+    	<header>
+	        <h1>talks</h1>
+    	    <div>talks to someone</div>
+        	<nav>
+			<a href="/<?= @$user->name ?>">home</a>
+			</nav>
+		</header>
+            your name is <?= $_SESSION["loginUser"] ?> 
+            this place is <?= $name ?><br />
+		<!-- ここから -->
+        <form action="/login" method="post">
+          <label>
+		 	talks ; <input type="text" name="content" value="">
+          </label>
+          <label>
+            to : <input type="text" name="to" value="">
+          </label>
+          <input type="submit" value="talks to">
+        </form>
+
+        <? foreach ($contents as $content): ?>
+         <div>
+         	<span><?= $content->updated_at ?></span><br>
+         	<span><?= $content->content ?></span>
+         	<span><?= $content->send_id ?></span>
+     	</div>
+	     <? endforeach ?>
+        <footer>
+        	<a href="/logout">logout</a>
+        </footer>
+    </body>
+</html>

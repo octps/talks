@@ -3,21 +3,22 @@
 require_once(__DIR__ . '/../db.php');
 require_once(__DIR__ . '/../model.php');
 
-class Model_User
+class Model_Contents
 {
-  public static function get($args) {
+  public static function get() {
       $dbh = \Db::getInstance();
       // todo try catch
       // 例外を投げる
-      $sql = "SELECT id,name FROM users where name = :name;";
+      $sql = "SELECT * FROM contents";
       $dbh->beginTransaction();
       $sth = $dbh->prepare($sql);
-      $sth->bindValue(':name', $args['name']);
       $sth->execute();
       $dbh->commit();
-      $user = $sth->fetchObject();
+      while ($contnet =  $sth->fetchObject()) {
+      	$contents[] = $contnet;
+      }
 
-      return $user;
-  }
+	  return $contents;
+	}
 }
 

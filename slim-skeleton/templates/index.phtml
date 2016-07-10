@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <meta charset="utf-8"/>
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 0;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-                color: #aaa;
-                font-size: 18px;
-            }
-
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
-        </style>
+        <link href="/css/common.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
-<? print_r($contents) ?>
-        <?php if (isset($args['name'])) : ?>
-            <h2>Hello <?= htmlspecialchars($args['name']); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a>
-        <?php endif; ?>
+        <h1>talks</h1>
+        <div>talks to someone</div>
+        <h1>login</h1>
+        <form action="/login" method="post">
+          <label>
+            E-mail : <input type="email" name="email" value="">
+          </label>
+          <label>
+            password : <input type="password" name="password" value="">
+          </label>
+          <input type="submit" value="login">
+        </form>
     </body>
 </html>
