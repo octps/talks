@@ -14,28 +14,34 @@
 			<a href="/<?= @$user->name ?>">home</a>
 			</nav>
 		</header>
-            your name is <?= $_SESSION["loginUser"] ?> 
-            this place is <?= $name ?><br />
-		<!-- ここから -->
+        your name is <?= isset($_SESSION["loginUser"]) ? $_SESSION["loginUser"] : 'guest' ?><br>
+        this place is <?= $name ?><br />
+        <? if (isset($_SESSION["loginUser"])): ?>
         <form action="/login" method="post">
           <label>
-		 	talks ; <input type="text" name="content" value="">
+      		 	talks : <input type="text" name="content" value="">
           </label>
           <label>
             to : <input type="text" name="to" value="">
           </label>
           <input type="submit" value="talks to">
         </form>
-
+        <? endif ?>
+        <div class="contents">
         <? foreach ($contents as $content): ?>
-         <div>
-         	<span><?= $content->updated_at ?></span><br>
-         	<span><?= $content->content ?></span>
-         	<span><?= $content->send_id ?></span>
-     	</div>
+          <p>
+           	<span><?= $content->updated_at ?></span>
+           	<span><?= $content->content ?></span>
+           	<span><?= $content->send_id ?></span>
+          </p>
 	     <? endforeach ?>
+        </div>
         <footer>
+        <? if (isset($_SESSION["loginUser"])): ?>
         	<a href="/logout">logout</a>
+        <? else: ?>
+          <a href="/">top</a>
+        <? endif ?>
         </footer>
     </body>
 </html>
