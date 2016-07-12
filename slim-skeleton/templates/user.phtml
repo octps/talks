@@ -22,10 +22,16 @@
       		 	talks : <input type="text" name="content" value="">
           </label>
           <label>
-            to : <input type="text" name="to" value="">
+            to : <input type="text" name="to" value="<?= $contents[0]->send_name ?>">
           </label>
           <input type="submit" value="talks to">
         </form>
+          <? if (@$_GET['error'] === 'user'): ?>
+            <p>there is no user</p>
+          <? endif ?>
+          <? if (@$_GET['error'] === 'content'): ?>
+            <p>please input talk message</p>
+          <? endif ?>
         <? endif ?>
         <div class="contents">
         <? foreach ($contents as $content): ?>

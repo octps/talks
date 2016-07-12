@@ -17,9 +17,13 @@ class Controller_User
   	  $content = htmlspecialchars($_POST['content']);
   	  $to['name'] = htmlspecialchars($_POST['to']);
   	  $toValue = Model_User::get($to);
-  	  if ($to === false) {
+  	  if ($toValue === false) {
         return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=user'));
 	  }
+  	  if ($content === '') {
+        return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=content'));
+	  }
+
       Model_User::post($_SESSION['userId'], $content, $toValue->id);
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}
