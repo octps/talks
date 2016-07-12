@@ -19,5 +19,22 @@ class Model_User
 
       return $user;
   }
+
+  public static function post($id, $content, $toId) {
+      $dbh = \Db::getInstance();
+      // todo try catch
+      // 例外を投げる
+      $sql = "INSERT into contents (user_id, content, send_id, created_at) values (:user_id, :content, :send_id, null);";
+      $dbh->beginTransaction();
+      $sth = $dbh->prepare($sql);
+      $sth->bindValue(':user_id', $id);
+      $sth->bindValue(':content', $content);
+      $sth->bindValue(':send_id', $toId);
+      $sth->execute();
+      $dbh->commit();
+
+      return true;
+  }
+
 }
 

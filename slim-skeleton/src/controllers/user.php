@@ -12,5 +12,17 @@ class Controller_User
 	  $userContetns = array('user'=>$user, 'contents'=>$contents);
 	  return $userContetns;
 	}
+
+  public static function post($res, $args) {
+  	  $content = htmlspecialchars($_POST['content']);
+  	  $to['name'] = htmlspecialchars($_POST['to']);
+  	  $toValue = Model_User::get($to);
+  	  if ($to === false) {
+        return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=user'));
+	  }
+      Model_User::post($_SESSION['userId'], $content, $toValue->id);
+      return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
+	}
+
 }
 

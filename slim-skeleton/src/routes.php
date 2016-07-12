@@ -7,7 +7,6 @@ require_once(__DIR__ . '/./controllers/login.php');
 
 $app->get('/', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton '/' route");
-
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
@@ -25,3 +24,6 @@ $app->post('/login', function($request, $response, $args) {
 	return controller_log::in($response, (object)$_POST);
 });
 
+$app->post('/{name}', function ($request, $response, $args) {
+	return Controller_User::post($response, $args);
+});
