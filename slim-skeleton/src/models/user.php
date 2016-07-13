@@ -36,5 +36,22 @@ class Model_User
       return true;
   }
 
+  public static function delete($usrId, $id) {
+      $dbh = \Db::getInstance();
+      if ($usrId === null) {
+        return false;
+      }
+      // todo try catch
+      // 例外を投げる
+      $sql = "UPDATE contents set delete_flag = 1 where id = :id";
+      $dbh->beginTransaction();
+      $sth = $dbh->prepare($sql);
+      $sth->bindValue(':id', $id);
+      $sth->execute();
+      $dbh->commit();
+
+      return true;
+  }
+
 }
 

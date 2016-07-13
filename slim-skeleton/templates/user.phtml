@@ -40,6 +40,13 @@
            	<span><?= $content->content ?></span><br>
             <span>to <?= $content->send_name ?></span>
           </p>
+        <? if (@$_SESSION["loginUser"] === $name): ?>
+          <form action="/<?= $_SESSION["loginUser"] ?>/<?= $content->id ?>" method="post">
+            <input type="hidden" name="userId" value="<?= $_SESSION["userId"] ?>">
+            <input type="hidden" name="_METHOD" value="delete">
+            <input type="submit" value="delete">
+          </form>
+        <? endif ?>
 	     <? endforeach ?>
         </div>
         <footer>

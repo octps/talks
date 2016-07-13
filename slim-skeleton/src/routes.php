@@ -27,3 +27,7 @@ $app->post('/login', function($request, $response, $args) {
 $app->post('/{name}', function ($request, $response, $args) {
 	return Controller_User::post($response, $args);
 });
+
+$app->delete('/{name}/{id}', function ($request, $response, $args) {
+	return Controller_User::delete($response, $args);
+});

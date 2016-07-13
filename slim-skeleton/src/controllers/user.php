@@ -28,5 +28,10 @@ class Controller_User
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}
 
+  public static function delete($res, $args) {
+      Model_User::delete($_SESSION['userId'], $args['id']);
+      return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
+	}
+
 }
 
