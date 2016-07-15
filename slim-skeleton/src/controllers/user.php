@@ -6,14 +6,14 @@ require_once(__DIR__ . '/../models/contents.php');
 
 class Controller_User
 {
-  public static function get($args) {
+	public static function get($args) {
 	  $user = Model_User::get($args);
 	  $contents = Model_Contents::get($user->id);
 	  $userContetns = array('user'=>$user, 'contents'=>$contents);
 	  return $userContetns;
 	}
 
-  public static function post($res, $args) {
+    public static function post($res, $args) {
   	  $content = htmlspecialchars($_POST['content']);
   	  $to['name'] = htmlspecialchars($_POST['to']);
   	  $toValue = Model_User::get($to);
@@ -28,7 +28,7 @@ class Controller_User
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}
 
-  public static function delete($res, $args) {
+    public static function delete($res, $args) {
       Model_User::delete($_SESSION['userId'], $args['id']);
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}

@@ -38,7 +38,8 @@ class Model_User
 
   public static function delete($usrId, $id) {
       $dbh = \Db::getInstance();
-      if ($usrId === null) {
+      if ($usrId === null
+        || $usrId !== $_SESSION['userId']) {
         return false;
       }
       // todo try catch

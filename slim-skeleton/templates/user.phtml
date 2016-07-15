@@ -11,7 +11,7 @@
 	        <h1>talks</h1>
     	    <div>talks to someone</div>
         	<nav>
-			<a href="/<?= @$user->name ?>">home</a>
+			<a href="/<?= @$_SESSION["loginUser"] ? @$_SESSION["loginUser"] : @$user->name ?>">home</a>
 			</nav>
 		</header>
         your name is <?= isset($_SESSION["loginUser"]) ? $_SESSION["loginUser"] : 'guest' ?><br>
