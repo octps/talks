@@ -6,10 +6,16 @@ require_once(__DIR__ . '/../models/contents.php');
 
 class Controller_User
 {
-	public static function get($args) {
+	public static function get($args, $request) {
+    $limit = 10;
+    $offset = 0;
+    if (@$request->getParam('offset') && is_numeric($request->getParam('offset'))) {
+      $offset = $request->getParam('offset');
+    }
+
 	  $user = Model_User::get($args);
-	  $contents = Model_Contents::get($user->id);
-	  $userContetns = array('user'=>$user, 'contents'=>$contents);
+	  $contents = Model_Contents::get($user->id, $offset, $limit);
+	  $userContetns = array('user'=>$user, 'contents'=>$contents, 'offset'=>$offset);
 	  return $userContetns;
 	}
 

@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../model.php');
 
 class Model_Contents
 {
-  public static function get($id) {
+  public static function get($id, $offset, $limit) {
       $dbh = \Db::getInstance();
       $contents = Null; 
       // todo try catch
@@ -30,7 +30,8 @@ class Model_Contents
               OR
               (contents.send_id = :user_id
               AND contents.delete_flag = 0)
-              ORDER BY updated_at DESC";
+              ORDER BY updated_at DESC
+              Limit $limit offset $offset;";
       $dbh->beginTransaction();
       $sth = $dbh->prepare($sql);
       $sth->bindValue(':user_id', $id);

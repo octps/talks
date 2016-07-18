@@ -25,8 +25,12 @@ $app->get('/auth', function($request, $response, $args) {
 });
 
 $app->get('/{name}', function ($request, $response, $args) {
-	$userContents = Controller_User::get($args);
-    $sender = array("name" => $args['name'], "contents"=>$userContents['contents'], 'user'=>$userContents['user']);
+	$userContents = Controller_User::get($args, $request);
+    $sender = array("name" => $args['name'],
+                    "contents"=>$userContents['contents'],
+                    'user'=>$userContents['user'],
+                    'offset'=>$userContents['offset'],
+                    );
     return $this->renderer->render($response, 'user.phtml', $sender);
 });
 

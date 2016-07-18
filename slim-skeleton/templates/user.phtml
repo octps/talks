@@ -47,7 +47,11 @@
             <input type="submit" value="delete">
           </form>
         <? endif ?>
-	     <? endforeach ?>
+	      <? endforeach ?>
+        </div>
+        <div class="pager">
+        <a href="?offset=<?= $offset - 1 ?>">前</a>
+        <a href="?offset=<?= $offset + 1?>">次</a>
         </div>
         <footer>
         <? if (isset($_SESSION["loginUser"])): ?>
