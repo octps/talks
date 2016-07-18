@@ -7,6 +7,7 @@ class Model_Contents
 {
   public static function get($id) {
       $dbh = \Db::getInstance();
+      $contents = Null; 
       // todo try catch
       // 例外を投げる
       $sql = "SELECT

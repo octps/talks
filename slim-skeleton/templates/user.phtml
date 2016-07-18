@@ -22,7 +22,7 @@
       		 	talks : <input type="text" name="content" value="">
           </label>
           <label>
-            to : <input type="text" name="to" value="<?= $contents[0]->send_name ?>">
+            to : <input type="text" name="to" value="<?= @$contents[0]->send_name ?>">
           </label>
           <input type="submit" value="talks to">
         </form>
@@ -34,7 +34,7 @@
           <? endif ?>
         <? endif ?>
         <div class="contents">
-        <? foreach ($contents as $content): ?>
+        <? foreach (@$contents ?: array() as $content): ?>
           <p>
            	<span><?= $content->updated_at ?></span>
            	<span><?= $content->content ?></span><br>
