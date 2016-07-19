@@ -19,7 +19,14 @@ class Controller_User
 	  return $userContetns;
 	}
 
-    public static function post($res, $args) {
+  public static function getOne($args, $request) {
+    $user = Model_User::get($args);
+    $contents = Model_Contents::getOne($args['id']);
+    $userContetns = array('user'=>$user, 'contents'=>$contents);
+    return $userContetns;
+  }
+
+  public static function post($res, $args) {
   	  $content = htmlspecialchars($_POST['content']);
   	  $to['name'] = htmlspecialchars($_POST['to']);
   	  $toValue = Model_User::get($to);

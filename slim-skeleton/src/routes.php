@@ -34,6 +34,15 @@ $app->get('/{name}', function ($request, $response, $args) {
     return $this->renderer->render($response, 'user.phtml', $sender);
 });
 
+$app->get('/{name}/{id}', function ($request, $response, $args) {
+  $userContents = Controller_User::getOne($args, $request);
+    $sender = array("name" => $args['name'],
+                    "contents"=>$userContents['contents'],
+                    'user'=>$userContents['user'],
+                    );
+    return $this->renderer->render($response, 'id.phtml', $sender);
+});
+
 
 $app->post('/login', function($request, $response, $args) {
 	return controller_log::in($response, (object)$_POST);

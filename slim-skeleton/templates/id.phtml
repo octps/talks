@@ -16,42 +16,20 @@
 		</header>
         your name is <?= isset($_SESSION["loginUser"]) ? $_SESSION["loginUser"] : 'guest' ?><br>
         this place is <?= $name ?><br />
-        <? if (@$_SESSION["loginUser"] === $name): ?>
-        <form action="/user" method="post">
-          <label>
-      		 	talks : <input type="text" name="content" value="">
-          </label>
-          <label>
-            to : <input type="text" name="to" value="<?= @$contents[0]->send_name ?>">
-          </label>
-          <input type="submit" value="talks to">
-        </form>
-          <? if (@$_GET['error'] === 'user'): ?>
-            <p>there is no user</p>
-          <? endif ?>
-          <? if (@$_GET['error'] === 'content'): ?>
-            <p>please input talk message</p>
-          <? endif ?>
-        <? endif ?>
         <div class="contents">
-        <? foreach (@$contents ?: array() as $content): ?>
           <p>
-           	<span><?= $content->updated_at ?></span>
-           	<span><a href="/<?= $name ?>/<?= $content->id ?>"><?= $content->content ?></a></span><br>
-            <span>to <?= $content->send_name ?></span>
+           	<span><?= $contents->updated_at ?></span>
+           	<span><?= $contents->content ?></span><br>
+            <span>to <?= $contents->send_name ?></span>
           </p>
         <? if (@$_SESSION["loginUser"] === $name): ?>
-          <form action="/<?= $_SESSION["loginUser"] ?>/<?= $content->id ?>" method="post">
+          <form action="/<?= $_SESSION["loginUser"] ?>/<?= $contents->id ?>" method="post">
             <input type="hidden" name="userId" value="<?= $_SESSION["userId"] ?>">
             <input type="hidden" name="_METHOD" value="delete">
             <input type="submit" value="delete">
           </form>
         <? endif ?>
-	      <? endforeach ?>
-        </div>
-        <div class="pager">
-        <a href="?offset=<?= $offset - 1 ?>">pre</a>
-        <a href="?offset=<?= $offset + 1?>">next</a>
+
         </div>
         <footer>
         <? if (isset($_SESSION["loginUser"])): ?>
