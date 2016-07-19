@@ -6,11 +6,38 @@ require_once(__DIR__ . '/../models/contents.php');
 
 class Controller_User
 {
-  public static function get($args) {
+	public static function get($args, $request) {
+    $limit = 10;
+    $offset = 0;
+    if (@$request->getParam('offset') && is_numeric($request->getParam('offset'))) {
+      $offset = $request->getParam('offset');
+    }
+
 	  $user = Model_User::get($args);
-	  $contents = Model_Contents::get();
-	  $userContetns = array('user'=>$user, 'contents'=>$contents);
+	  $contents = Model_Contents::get($user->id, $offset, $limit);
+	  $userContetns = array('user'=>$user, 'contents'=>$contents, 'offset'=>$offset);
 	  return $userContetns;
 	}
+
+    public static function post($res, $args) {
+  	  $content = htmlspecialchars($_POST['content']);
+  	  $to['name'] = htmlspecialchars($_POST['to']);
+  	  $toValue = Model_User::get($to);
+  	  if ($toValue === false) {
+        return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=user'));
+	  }
+  	  if ($content === '') {
+        return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=content'));
+	  }
+
+      Model_User::post($_SESSION['userId'], $content, $toValue->id);
+      return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
+	}
+
+    public static function delete($res, $args) {
+      Model_User::delete($_SESSION['userId'], $args['id']);
+      return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
+	}
+
 }
 

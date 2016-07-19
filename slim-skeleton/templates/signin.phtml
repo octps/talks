@@ -9,16 +9,22 @@
     <body>
         <h1>talks</h1>
         <div>talks to someone</div>
-        <h2>login</h2>
-        <form action="/login" method="post">
+        <h2>signin</h2>
+        input name email password.<br>
+        we send to you email.
+        <form action="/signin" method="post">
+          <label>
+            name : <input type="text" name="name" value="">
+          </label>
           <label>
             E-mail : <input type="email" name="email" value="">
           </label>
           <label>
             password : <input type="password" name="password" value="">
           </label>
-          <input type="submit" value="login">
+          <input type="submit" value="signin">
         </form>
-        <a href="/signin">signin</a>
     </body>
 </html>
+
+

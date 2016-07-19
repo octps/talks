@@ -9,16 +9,17 @@
     <body>
         <h1>talks</h1>
         <div>talks to someone</div>
-        <h2>login</h2>
-        <form action="/login" method="post">
+        <h2>auth</h2>
+        input your name and onetime password.<br>
+        <form action="/auth" method="post">
           <label>
-            E-mail : <input type="email" name="email" value="">
+            name : <input type="text" name="name" value="">
           </label>
           <label>
-            password : <input type="password" name="password" value="">
+            one time password : <input type="password" name="onetime_password" value="">
           </label>
-          <input type="submit" value="login">
+          <input type="submit" value="go">
         </form>
-        <a href="/signin">signin</a>
     </body>
 </html>
+
