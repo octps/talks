@@ -4,24 +4,24 @@ require_once(__DIR__ . '/../controller.php');
 require_once(__DIR__ . '/../models/user.php');
 require_once(__DIR__ . '/../models/contents.php');
 
-class Controller_User
+class controller_user
 {
 	public static function get($args, $request) {
     $limit = 10;
     $offset = 0;
     if (@$request->getParam('offset') && is_numeric($request->getParam('offset'))) {
-      $offset = $request->getParam('offset');
+      $offset = $request->getParam('offset') * $limit;
     }
 
-	  $user = Model_User::get($args);
-	  $contents = Model_Contents::get($user->id, $offset, $limit);
-	  $userContetns = array('user'=>$user, 'contents'=>$contents, 'offset'=>$offset);
+	  $user = model_user::get($args);
+	  $contents = model_contents::get($user->id, $offset, $limit);
+	  $userContetns = array('user'=>$user, 'contents'=>$contents, 'offset'=>$offset/$limit);
 	  return $userContetns;
 	}
 
   public static function getOne($args, $request) {
-    $user = Model_User::get($args);
-    $contents = Model_Contents::getOne($args['id']);
+    $user = model_user::get($args);
+    $contents = model_contents::getOne($args['id']);
     $userContetns = array('user'=>$user, 'contents'=>$contents);
     return $userContetns;
   }
@@ -29,7 +29,7 @@ class Controller_User
   public static function post($res, $args) {
   	  $content = htmlspecialchars($_POST['content']);
   	  $to['name'] = htmlspecialchars($_POST['to']);
-  	  $toValue = Model_User::get($to);
+  	  $toValue = model_user::get($to);
   	  if ($toValue === false) {
         return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=user'));
 	  }
@@ -37,12 +37,12 @@ class Controller_User
         return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser'] . '?error=content'));
 	  }
 
-      Model_User::post($_SESSION['userId'], $content, $toValue->id);
+      model_user::post($_SESSION['userId'], $content, $toValue->id);
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}
 
     public static function delete($res, $args) {
-      Model_User::delete($_SESSION['userId'], $args['id']);
+      model_user::delete($_SESSION['userId'], $args['id']);
       return $res->withStatus(200)->withHeader('Location', ('/' . $_SESSION['loginUser']));
 	}
 

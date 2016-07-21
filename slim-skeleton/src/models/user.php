@@ -3,7 +3,7 @@
 require_once(__DIR__ . '/../db.php');
 require_once(__DIR__ . '/../model.php');
 
-class Model_User
+class model_user
 {
   public static function get($args) {
       $dbh = \Db::getInstance();

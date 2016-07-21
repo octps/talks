@@ -6,6 +6,7 @@ require_once(__DIR__ . '/./controllers/user.php');
 require_once(__DIR__ . '/./controllers/login.php');
 require_once(__DIR__ . '/./controllers/signin.php');
 require_once(__DIR__ . '/./controllers/auth.php');
+require_once(__DIR__ . '/./controllers/search.php');
 
 $app->get('/', function ($request, $response, $args) {
     $this->logger->info("Slim-Skeleton '/' route");
@@ -24,8 +25,13 @@ $app->get('/auth', function($request, $response, $args) {
 	return $this->renderer->render($response, 'auth.phtml', $args);
 });
 
+$app->get('/search', function($request, $response, $args) {
+  $contents = controller_search::post($request, $response, $args);
+  return $this->renderer->render($response, 'search.phtml', $contents);
+});
+
 $app->get('/{name}', function ($request, $response, $args) {
-	$userContents = Controller_User::get($args, $request);
+	$userContents = controller_user::get($args, $request);
     $sender = array("name" => $args['name'],
                     "contents"=>$userContents['contents'],
                     'user'=>$userContents['user'],
@@ -35,7 +41,7 @@ $app->get('/{name}', function ($request, $response, $args) {
 });
 
 $app->get('/{name}/{id}', function ($request, $response, $args) {
-  $userContents = Controller_User::getOne($args, $request);
+  $userContents = controller_user::getOne($args, $request);
     $sender = array("name" => $args['name'],
                     "contents"=>$userContents['contents'],
                     'user'=>$userContents['user'],
@@ -65,9 +71,9 @@ $app->post('/auth', function($request, $response, $args) {
 });
 
 $app->post('/{name}', function ($request, $response, $args) {
-	return Controller_User::post($response, $args);
+	return controller_user::post($response, $args);
 });
 
 $app->delete('/{name}/{id}', function ($request, $response, $args) {
-	return Controller_User::delete($response, $args);
+	return controller_user::delete($response, $args);
 });

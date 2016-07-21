@@ -8,11 +8,15 @@
     </head>
     <body>
     	<header>
-	        <h1>talks</h1>
-    	    <div>talks to someone</div>
-        	<nav>
-			<a href="/<?= @$_SESSION["loginUser"] ? @$_SESSION["loginUser"] : @$user->name ?>">home</a>
-			</nav>
+	      <h1>talks</h1>
+    	  <div>talks to someone</div>
+      	<nav>
+          <a href="/<?= @$_SESSION["loginUser"] ? @$_SESSION["loginUser"] : @$user->name ?>">home</a>
+          <form action="/search" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="search">
+          </form>
+		</nav>
 		</header>
         your name is <?= isset($_SESSION["loginUser"]) ? $_SESSION["loginUser"] : 'guest' ?><br>
         this place is <?= $name ?><br />
@@ -38,7 +42,8 @@
           <p>
            	<span><?= $content->updated_at ?></span>
            	<span><a href="/<?= $name ?>/<?= $content->id ?>"><?= $content->content ?></a></span><br>
-            <span>to <?= $content->send_name ?></span>
+           	<span>from <a href="<?= $content->user_name ?>"><?= $content->user_name ?></a></span>
+            <span>to <a href="/<?= $content->send_name ?>"><?= $content->send_name ?></a></span>
           </p>
         <? if (@$_SESSION["loginUser"] === $name): ?>
           <form action="/<?= $_SESSION["loginUser"] ?>/<?= $content->id ?>" method="post">
@@ -51,7 +56,7 @@
         </div>
         <div class="pager">
         <a href="?offset=<?= $offset - 1 ?>">pre</a>
-        <a href="?offset=<?= $offset + 1?>">next</a>
+        <a href="?offset=<?= $offset + 1 ?>">next</a>
         </div>
         <footer>
         <? if (isset($_SESSION["loginUser"])): ?>
