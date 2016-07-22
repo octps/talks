@@ -55,8 +55,12 @@
 	      <? endforeach ?>
         </div>
         <div class="pager">
-        <a href="?offset=<?= $offset - 1 ?>">pre</a>
-        <a href="?offset=<?= $offset + 1 ?>">next</a>
+        <? if ($offset > 0): ?>
+	        <a href="?offset=<?= $offset - 1 ?>">pre</a>
+	    <? endif ?>
+	    <? if ($contents !== NUll): ?>
+	        <a href="?offset=<?= $offset + 1 ?>">next</a>
+	    <? endif ?>
         </div>
         <footer>
         <? if (isset($_SESSION["loginUser"])): ?>
