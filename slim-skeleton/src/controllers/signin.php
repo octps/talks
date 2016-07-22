@@ -17,7 +17,7 @@ class controller_signin {
       && filter_var(htmlspecialchars($email), FILTER_VALIDATE_EMAIL)
       && $password !== ''
       && preg_match("/^[a-zA-Z0-9]+$/", $name)) {
-        $sign = Model_Signin::up(htmlspecialchars($name), htmlspecialchars($email), htmlspecialchars($password));
+        $sign = model_signin::up(htmlspecialchars($name), htmlspecialchars($email), htmlspecialchars($password));
     }
     else {
       $sign = false;
