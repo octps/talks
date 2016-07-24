@@ -5,6 +5,8 @@
         <title>Slim 3</title>
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <link href="/css/common.css" rel="stylesheet" type="text/css">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="/js/talks/speech.js"></script>
     </head>
     <body>
     	<header>
@@ -16,18 +18,19 @@
             <input type="text" name="q">
             <input type="submit" value="search">
           </form>
-		</nav>
-		</header>
+		  </nav>
+		  </header>
         your name is <?= isset($_SESSION["loginUser"]) ? $_SESSION["loginUser"] : 'guest' ?><br>
         this place is <?= $name ?><br />
         <? if (@$_SESSION["loginUser"] === $name): ?>
         <form action="/user" method="post">
           <label>
-      		 	talks : <input type="text" name="content" value="">
+      		 	talks : <input type="text" name="content" value="" id="result_text">
           </label>
           <label>
             to : <input type="text" name="to" value="<?= @$contents[0]->send_name ?>">
           </label>
+          <input type="button" onClick="record()" value="録音開始" />
           <input type="submit" value="talks to">
         </form>
           <? if (@$_GET['error'] === 'user'): ?>
